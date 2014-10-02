@@ -23,7 +23,7 @@ namespace BattleShip
         {
             this.Y = y;
             this.X = x;
-            this.Status = status;
+            this.Status = Status;
         }
     }
 }

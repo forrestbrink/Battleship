@@ -15,11 +15,18 @@ namespace BattleShip
 
         public Point[,] Ocean {get;set;}
         public List<Ship> ListOfShips {get; set;}
-        public bool AllShipsDestroyed {get; 
+        public bool AllShipsDestroyed
         {
-            return this.ListOfShips.All(x => x.IsDestroyed);
+            get
+            {
+               this.ListOfShips(x => x.IsDestroyed);
+            }
+            set
+            {
+                this.ListOfShips.All(x => x.IsDestroyed);
+            }
         }
-        }
+        
 
         public Grid()
         {
@@ -28,7 +35,7 @@ namespace BattleShip
 			{
 			 for (int x = 0; x < 10; x++)
 			{
-			 this.Ocean[x, y] = new Point(x, y, Point.PointStatus.Empty);
+                this.Ocean[x, y] = new Point(x, y, PointStatus.Empty);
 			}
 			}
 
@@ -103,13 +110,13 @@ namespace BattleShip
 	         Console.WriteLine("Enter your first coordinate:");
                  Console.ReadLine();
 	}
-	         int x = int.Parse(exception)
-                 while (yexception = "")
+	         int x = int.Parse(exception);
+                 while (yexception == "")
 	{
 	         Console.WriteLine("Enter your second coordinate:");
                      Console.ReadLine();
 	}
-                int y = int.Parse(yexception)
+                int y = int.Parse(yexception);
 
                     if (x <= 9 && y <= 9)
 	{
@@ -119,42 +126,12 @@ namespace BattleShip
 	
             Display();
             Console.WriteLine("Congratulations, You Win!");
-            DisplayHighScore();
 
              
         }
             
         }
-        static void AddHighScore(int playerscore)
-        {
-            Console.WriteLine("What is your name?");
-            string name = Console.ReadLine();
-
-            ForrestEntities db = new ForrestEntities();
-
-            HighScore newHighScore = new HighScore();
-            newHighScore.Name = playername;
-            newHighScore.Date = DateTime.Now;
-            newHighScore.Game = "Battleship";
-            newHighScore.Score = playerscore;
-
-            db.HighScores.Add(newHighScore);
-
-            db.Save();
-        }
-        static void DisplayHighScore()
-    {
-            Console.WriteLine("High Scores");
-            Console.WriteLine("---------------------------------");
-            Console.WriteLine();
-
-            ForrestEntities db = new ForrestEntities();
-            List<HighScore> HighScoreList = db.HighScores.Where(x => x.Game == "Battleship").OrderBy(x => x.Score).Take(10).ToList();
-
-            foreach (HighScore highscore in HighScoreList)
-	{
-		    Console.WriteLine("{0}, {1} Took {2} tries to win! {3}", HighScoreList.IndexOf(highscore) + 1, highscore.Score, highscore.Date.Value.ToShortDateString());
-	}
+        
     }
 }
-}
+

@@ -21,8 +21,13 @@ namespace BattleShip
             public ShipType Type {get; set;}
         public int Length {get; set;}
         public List<Point> OccupiedPoints {get; set;}
-        public bool IsDestroyed {get; {return OccupiedPoints.All(x => x.Status == Point.PointStatus.Hit}}
-        
+     public bool IsDestroyed { get;
+            set
+            {
+                OccupiedPoints.All(x => x.Status == PointStatus.Hit);
+            }
+        }
+    
         public Ship(ShipType typeOfShip)
         {
             this.Type = typeOfShip;
